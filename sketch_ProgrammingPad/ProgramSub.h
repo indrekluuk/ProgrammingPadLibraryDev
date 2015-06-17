@@ -6,21 +6,22 @@
 #define PROGRAMMINGPADLIBRARYDEV_PROGRAMSUB_H
 
 #include "Sequencer.h"
-#include "CommandSelector.h"
+#include "NodeReader.h"
+#include "NodeExecuter.h"
 
 class ProgramSub {
 
 private:
     uint8_t m_firstNodeId;
     uint8_t m_nodeCount;
-    CommandSelector * m_commandSelector;
+    NodeExecuter * m_nodeExecuter;
 
     MethodSequencer<ProgramSub> m_executionSequencer;
 
 public:
     ProgramSub();
 
-    void init(uint8_t firstNodeId, uint8_t nodeCount, CommandSelector & commandSelector);
+    void init(uint8_t firstNodeId, uint8_t nodeCount, NodeExecuter & nodeExecuter);
 
     void start(Callback* done);
     void stop();

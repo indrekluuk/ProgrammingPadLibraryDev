@@ -6,8 +6,10 @@
 #define PROGRAMMABLEBOT_PROGRAMMINGPAD_H
 
 #include "global.h"
-#include "Command.h"
+#include "NodeReader.h"
 #include "CommandSelector.h"
+#include "NodeExecuter.h"
+#include "Command.h"
 #include "ProgramSub.h"
 
 
@@ -15,7 +17,9 @@ template<size_t commandCount, size_t subCount>
 class ProgrammingPad {
 
 private:
+    HardwareNodeReader m_nodeReader;
     CommandSelectorList<commandCount> m_commandSelector;
+    NodeExecuter m_nodeExecuter;
     ProgramSub m_subs[subCount];
 
 
@@ -28,14 +32,16 @@ public:
             uint8_t p5,
             uint8_t p6,
             uint16_t r1
-    ) {
+    ) : m_nodeExecuter(m_nodeReader, m_commandSelector) {
     }
 
 
-    void initSub(uint8_t index, uint8_t firstNodeId, uint8_t nodeCount) {
+    ProgramSub * initSub(uint8_t index, uint8_t firstNodeId, uint8_t nodeCount) {
         if (index < subCount) {
-            m_subs[index].init(firstNodeId, nodeCount, m_commandSelector);
+            m_subs[index].init(firstNodeId, nodeCount, m_nodeExecuter);
+            return &m_subs[index];
         }
+        return nullptr;
     }
 
 

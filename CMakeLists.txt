@@ -33,5 +33,5 @@ add_executable(ProgrammingPadLibraryDev
         sketch_ProgrammingPad/Command.cpp
         sketch_ProgrammingPad/Command.h
         sketch_ProgrammingPad/ProgramSub.cpp
-        sketch_ProgrammingPad/ProgramSub.h sketch_ProgrammingPad/Commands.cpp sketch_ProgrammingPad/CommandSelector.h)
+        sketch_ProgrammingPad/ProgramSub.h sketch_ProgrammingPad/CommandSelector.cpp sketch_ProgrammingPad/CommandSelector.h sketch_ProgrammingPad/NodeReader.cpp sketch_ProgrammingPad/NodeReader.h sketch_ProgrammingPad/NodeExecuter.cpp sketch_ProgrammingPad/NodeExecuter.h)
 
