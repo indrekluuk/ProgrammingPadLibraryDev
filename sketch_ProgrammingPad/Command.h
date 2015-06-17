@@ -1,0 +1,14 @@
+//
+// Created by indrek on 17.06.2015.
+//
+
+#ifndef PROGRAMMINGPADLIBRARYDEV_COMMAND_H
+#define PROGRAMMINGPADLIBRARYDEV_COMMAND_H
+
+
+class Command {
+
+};
+
+
+#endif //PROGRAMMINGPADLIBRARYDEV_COMMAND_H

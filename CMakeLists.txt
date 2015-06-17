@@ -28,5 +28,10 @@ add_executable(ProgrammingPadLibraryDev
         ${FRAMEWORK_SOURCE_FILES}
         ${LIBRARY_SOURCE_FILES}
         ${TEST_SOURCE_FILES}
-)
+        sketch_ProgrammingPad/ProgrammingPad.cpp
+        sketch_ProgrammingPad/ProgrammingPad.h
+        sketch_ProgrammingPad/Command.cpp
+        sketch_ProgrammingPad/Command.h
+        sketch_ProgrammingPad/ProgramSub.cpp
+        sketch_ProgrammingPad/ProgramSub.h sketch_ProgrammingPad/Commands.cpp sketch_ProgrammingPad/CommandSelector.h)
 
