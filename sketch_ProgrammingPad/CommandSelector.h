@@ -19,16 +19,16 @@ template<size_t commandCount>
 class CommandSelectorList : public CommandSelector {
 
 private:
-    uint16_t commandR2[commandCount];
+    uint16_t commandR1[commandCount];
     Command * commands[commandCount];
 
 
 
 public:
 
-    void initCommand(uint8_t index, uint16_t r2, Command & command) {
+    void initCommand(uint8_t index, uint16_t r1, Command & command) {
         if (index < commandCount) {
-            commandR2[index] = r2;
+            commandR1[index] = r1;
             commands[index] = &command;
         }
     }

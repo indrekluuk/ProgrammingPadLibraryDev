@@ -31,7 +31,7 @@ public:
             uint8_t p4,
             uint8_t p5,
             uint8_t p6,
-            uint16_t r1
+            uint16_t r2
     ) : m_nodeExecuter(m_nodeReader, m_commandSelector) {
     }
 
@@ -45,8 +45,8 @@ public:
     }
 
 
-    void initCommand(uint8_t index, uint16_t r2, Command & command) {
-        m_commandSelector.initCommand(index, r2, command);
+    void initCommand(uint8_t index, uint16_t r1, Command & command) {
+        m_commandSelector.initCommand(index, r1, command);
     }
 
 
