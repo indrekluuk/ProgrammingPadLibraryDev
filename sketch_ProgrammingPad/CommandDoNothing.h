@@ -13,7 +13,7 @@ class CommandDoNothing : public Command{
 public:
 
 
-    void execute(Callback & callback);
+    void execute(Callback & done);
 };
 
 

@@ -7,10 +7,11 @@
 #include "Scheduler.h"
 #include "ProgramSub.h"
 #include "mock/MockNodeReader.h"
+#include "mock/MockCommandCountExecutions.h"
 
 
 
-static uint16_t CMD_1_R1 = 1000;
+static uint16_t CMD_EXEC_CNT_R1 = 1000;
 
 
 class SubExecutionTest : public ::testing::Test {
@@ -22,11 +23,11 @@ protected:
     MockNodeReader m_nodeReader;
     NodeExecuterConfiguration<1> m_nodeExecuter;
 
-    CommandDoNothing m_command;
+    MockCommandCountExecutions m_commandCountExecutions;
 
     SubExecutionTest()
     {
-        m_nodeExecuter.initCommand(0, CMD_1_R1, m_command);
+        m_nodeExecuter.initCommand(0, CMD_EXEC_CNT_R1, m_commandCountExecutions);
     }
 
     virtual void SetUp() {
@@ -47,8 +48,13 @@ protected:
 
 
 TEST_F(SubExecutionTest, testExecuteSubNodes) {
+    m_nodeReader.setNode(0, CMD_EXEC_CNT_R1);
+    m_nodeReader.setNode(1, CMD_EXEC_CNT_R1);
+
     ProgramSub sub;
-    sub.init(0, 5, m_nodeReader, m_nodeExecuter);
+    sub.init(0, 2, m_nodeReader, m_nodeExecuter);
+
+    ASSERT_EQ(2, m_commandCountExecutions.getExecutinoCount());
 
 };
 

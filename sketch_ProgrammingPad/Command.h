@@ -11,7 +11,7 @@
 class Command {
 
 public:
-    virtual void execute(Callback & callback) = 0;
+    virtual void execute(Callback & done) = 0;
 
 };
 

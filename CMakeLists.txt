@@ -39,5 +39,5 @@ add_executable(ProgrammingPadLibraryDev
         sketch_ProgrammingPad/NodeReader.cpp
         sketch_ProgrammingPad/NodeReader.h
         sketch_ProgrammingPad/NodeExecuter.cpp
-        sketch_ProgrammingPad/NodeExecuter.h sketch_ProgrammingPad/CommandDoNothing.cpp sketch_ProgrammingPad/CommandDoNothing.h)
+        sketch_ProgrammingPad/NodeExecuter.h sketch_ProgrammingPad/CommandDoNothing.cpp sketch_ProgrammingPad/CommandDoNothing.h tests/mock/MockCommandCountExecutions.h)
 

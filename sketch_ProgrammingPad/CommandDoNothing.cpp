@@ -4,6 +4,6 @@
 
 #include "CommandDoNothing.h"
 
-void CommandDoNothing::execute(Callback & callback) {
-    callback.call();
+void CommandDoNothing::execute(Callback & done) {
+    done.call();
 }
