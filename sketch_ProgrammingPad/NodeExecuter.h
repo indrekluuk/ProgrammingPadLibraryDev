@@ -6,21 +6,80 @@
 #define PROGRAMMINGPADLIBRARYDEV_NODEEXECUTER_H
 
 #include "global.h"
+
+#include "CommandDoNothing.h"
 #include "NodeReader.h"
-#include "CommandSelector.h"
 #include "Callback.h"
+#include <stdlib.h>
 
 
 class NodeExecuter {
 
-private:
-    NodeReader & m_nodeReader;
-    CommandSelector & m_commandSelector;
+public:
+
+    void execute(uint8_t nodeR1, Callback & done);
 
 public:
-    NodeExecuter(NodeReader & nodeReader, CommandSelector & commandSelector);
+    virtual Command & getCommand(uint16_t r1) = 0;
 
-    void execute(uint8_t nodeId, Callback & done);
+};
+
+
+
+
+
+template<uint8_t commandCount>
+class NodeExecuterConfiguration : public NodeExecuter {
+
+private:
+    uint16_t m_commandR1[commandCount];
+    Command * m_commands[commandCount];
+    CommandDoNothing m_commandDoNothing;
+
+
+public:
+
+    NodeExecuterConfiguration() {
+        for (uint8_t i=0; i<commandCount; i++) {
+            m_commandR1[i] = 0;
+            m_commands[i] = &m_commandDoNothing;
+        }
+    }
+
+    void initCommand(uint8_t index, uint16_t r1, Command & command) {
+        if (index < commandCount) {
+            m_commandR1[index] = r1;
+            m_commands[index] = &command;
+        }
+    }
+
+    Command & getCommand(uint16_t r1) {
+        uint8_t commandIndex = commandCount;
+        int32_t minDifference = 100000;
+
+        for (uint8_t i=0; i<commandCount; i++) {
+            if (isCommandInitialized(i)) {
+                int32_t diff = getDifference(m_commandR1[i], r1);
+                if (diff < minDifference) {
+                    minDifference = diff;
+                    commandIndex = i;
+                }
+            }
+        }
+
+        return commandIndex < commandCount ? *m_commands[commandIndex] : m_commandDoNothing;
+    }
+
+
+private:
+
+    bool isCommandInitialized(uint8_t index) {
+        return m_commandR1[index] > 0;
+    }
+
+    int32_t getDifference(int32_t ra, int32_t rb) {
+        return abs(ra - rb);
+    }
 
 };
 

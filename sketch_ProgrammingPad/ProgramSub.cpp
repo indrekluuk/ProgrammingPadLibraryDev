@@ -13,9 +13,10 @@ ProgramSub::ProgramSub() :
 {
 }
 
-void ProgramSub::init(uint8_t firstNodeId, uint8_t nodeCount, NodeExecuter & nodeExecuter) {
+void ProgramSub::init(uint8_t firstNodeId, uint8_t nodeCount, NodeReader & nodeReader, NodeExecuter & nodeExecuter) {
     m_firstNodeId = firstNodeId;
     m_nodeCount = nodeCount;
+    m_nodeReader = &nodeReader;
     m_nodeExecuter = &nodeExecuter;
 }
 
@@ -30,7 +31,8 @@ void ProgramSub::stop() {
 void ProgramSub::executeNode(Sequencer &sequencer, uint8_t step) {
     uint8_t nodeIndex = step - (uint8_t)1;
     if (nodeIndex < m_nodeCount) {
-        m_nodeExecuter->execute(getNodeId(nodeIndex), sequencer.nextWhenDone());
+        uint16_t nodeR1 = m_nodeReader->getNodeR1(getNodeId(nodeIndex));
+        m_nodeExecuter->execute(nodeR1, sequencer.nextWhenDone());
     }
 }
 

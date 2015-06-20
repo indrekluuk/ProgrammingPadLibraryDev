@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}") #  -std=c++11
 
 include_directories("./frameworks")
 include_directories("./library/Scheduler")
-include_directories("./sketch_ProgrammableBot")
+include_directories("./sketch_ProgrammingPad")
 include_directories("./tests")
 
 
@@ -21,6 +21,8 @@ set(LIBRARY_SOURCE_FILES
 set(TEST_SOURCE_FILES
         tests/main.cpp
         tests/Arduino.cpp
+        tests/mock/MockNodeReader.h
+        tests/SubExecutionTest.cpp
 )
 
 
@@ -33,5 +35,9 @@ add_executable(ProgrammingPadLibraryDev
         sketch_ProgrammingPad/Command.cpp
         sketch_ProgrammingPad/Command.h
         sketch_ProgrammingPad/ProgramSub.cpp
-        sketch_ProgrammingPad/ProgramSub.h sketch_ProgrammingPad/CommandSelector.cpp sketch_ProgrammingPad/CommandSelector.h sketch_ProgrammingPad/NodeReader.cpp sketch_ProgrammingPad/NodeReader.h sketch_ProgrammingPad/NodeExecuter.cpp sketch_ProgrammingPad/NodeExecuter.h)
+        sketch_ProgrammingPad/ProgramSub.h
+        sketch_ProgrammingPad/NodeReader.cpp
+        sketch_ProgrammingPad/NodeReader.h
+        sketch_ProgrammingPad/NodeExecuter.cpp
+        sketch_ProgrammingPad/NodeExecuter.h sketch_ProgrammingPad/CommandDoNothing.cpp sketch_ProgrammingPad/CommandDoNothing.h)
 

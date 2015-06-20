@@ -7,7 +7,6 @@
 
 #include "global.h"
 #include "NodeReader.h"
-#include "CommandSelector.h"
 #include "NodeExecuter.h"
 #include "Command.h"
 #include "ProgramSub.h"
@@ -18,8 +17,7 @@ class ProgrammingPad {
 
 private:
     HardwareNodeReader m_nodeReader;
-    CommandSelectorList<commandCount> m_commandSelector;
-    NodeExecuter m_nodeExecuter;
+    NodeExecuterConfiguration<commandCount> m_nodeExecuter;
     ProgramSub m_subs[subCount];
 
 
@@ -32,13 +30,13 @@ public:
             uint8_t p5,
             uint8_t p6,
             uint16_t r2
-    ) : m_nodeExecuter(m_nodeReader, m_commandSelector) {
+    ) {
     }
 
 
     ProgramSub * initSub(uint8_t index, uint8_t firstNodeId, uint8_t nodeCount) {
         if (index < subCount) {
-            m_subs[index].init(firstNodeId, nodeCount, m_nodeExecuter);
+            m_subs[index].init(firstNodeId, nodeCount, m_nodeReader, m_nodeExecuter);
             return &m_subs[index];
         }
         return nullptr;
@@ -46,7 +44,7 @@ public:
 
 
     void initCommand(uint8_t index, uint16_t r1, Command & command) {
-        m_commandSelector.initCommand(index, r1, command);
+        m_nodeExecuter.initCommand(index, r1, command);
     }
 
 

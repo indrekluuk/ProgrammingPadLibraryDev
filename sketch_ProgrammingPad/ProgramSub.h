@@ -14,6 +14,7 @@ class ProgramSub {
 private:
     uint8_t m_firstNodeId;
     uint8_t m_nodeCount;
+    NodeReader * m_nodeReader;
     NodeExecuter * m_nodeExecuter;
 
     MethodSequencer<ProgramSub> m_executionSequencer;
@@ -21,7 +22,7 @@ private:
 public:
     ProgramSub();
 
-    void init(uint8_t firstNodeId, uint8_t nodeCount, NodeExecuter & nodeExecuter);
+    void init(uint8_t firstNodeId, uint8_t nodeCount, NodeReader & nodeReader, NodeExecuter & nodeExecuter);
 
     void start(Callback* done);
     void stop();

@@ -5,8 +5,13 @@
 #ifndef PROGRAMMINGPADLIBRARYDEV_COMMAND_H
 #define PROGRAMMINGPADLIBRARYDEV_COMMAND_H
 
+#include "Callback.h"
+
 
 class Command {
+
+public:
+    virtual void execute(Callback & callback) = 0;
 
 };
 

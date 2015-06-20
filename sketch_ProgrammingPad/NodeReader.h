@@ -11,7 +11,7 @@
 class NodeReader {
 
 public:
-    virtual uint16_t getNodeR2(uint8_t nodeId) = 0;
+    virtual uint16_t getNodeR1(uint8_t nodeId) = 0;
 
 };
 
@@ -21,7 +21,7 @@ class HardwareNodeReader : public NodeReader {
 
 
 public:
-    uint16_t getNodeR2(uint8_t nodeId) {
+    uint16_t getNodeR1(uint8_t nodeId) {
         return 0; //todo
     }
 
