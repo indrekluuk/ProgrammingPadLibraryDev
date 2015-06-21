@@ -24,6 +24,9 @@
  *
  */
 
+#include <Scheduler.h>
+#include "ProgrammingPad.h"
+
 
 void setup() {
 }
