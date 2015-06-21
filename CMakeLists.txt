@@ -24,6 +24,7 @@ set(TEST_SOURCE_FILES
         tests/mock/MockNodeReader.h
         tests/mock/MockCommandCountExecutions.h
         tests/SubExecutionTest.cpp
+        tests/NodeExecuterTest.cpp
 )
 
 
