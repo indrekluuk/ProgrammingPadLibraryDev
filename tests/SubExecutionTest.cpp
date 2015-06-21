@@ -153,3 +153,59 @@ TEST_F(SubExecutionTest, testWaitCommand) {
     ASSERT_EQ(2, m_commandCountExecutions1.getExecutinoCount());
 };
 
+
+
+
+
+
+
+TEST_F(SubExecutionTest, testCancelExecution) {
+    m_nodeReader.setNode(0, CMD_DELAY_1000_R1);
+    m_nodeReader.setNode(1, CMD_EXEC_CNT_1_R1);
+    m_nodeReader.setNode(2, CMD_DELAY_15000_R1);
+    m_nodeReader.setNode(3, CMD_EXEC_CNT_1_R1);
+
+    m_main.init(0, 4, m_nodeReader, m_nodeExecuter);
+    m_main.start(nullptr);
+
+    ASSERT_EQ(0, m_commandCountExecutions1.getExecutinoCount());
+    runProgram(1005);
+    ASSERT_EQ(1, m_commandCountExecutions1.getExecutinoCount());
+    m_main.stop();
+    runProgram(20000);
+    ASSERT_EQ(1, m_commandCountExecutions1.getExecutinoCount());
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

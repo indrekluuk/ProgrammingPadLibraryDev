@@ -26,6 +26,7 @@ void ProgramSub::start(Callback * done) {
 
 void ProgramSub::stop() {
     m_executionSequencer.stop();
+    Command::stop();
 }
 
 void ProgramSub::executeNode(Sequencer &sequencer, uint8_t step) {
