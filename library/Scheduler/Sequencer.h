@@ -41,7 +41,9 @@ public:
     Scheduler m_sequenceDelayScheduler;
     uint8_t m_sequenceIdentifier;
     uint8_t m_sequenceStep;
+    bool m_isStepRunning;
     bool m_hasNextStep;
+    bool m_isNextStepPostponed;
     Callback* m_sequenceDoneCallback;
 
 public:
@@ -56,18 +58,20 @@ public:
     bool isRunning();
     bool isRunning(uint8_t sequenceIdentifier);
 
-    void stop();
-
     void nextWithDelay(uint32_t time_ms);
     Callback& nextWhenDone();
 
+    void stop();
+
+
 protected:
 
-    virtual void callNextStep() = 0;
+    virtual void callStep() = 0;
 
 private:
 
     void initNextStep();
+    void runNextStep();
     void sequenceDone();
     void callDone();
 
@@ -98,7 +102,7 @@ public:
 
 protected:
 
-    void callNextStep() { //override;
+    void callStep() { //override;
         if (m_sequenceStepFunction != NULL) {
             m_sequenceStepFunction(*this, m_sequenceStep);
         }
@@ -147,7 +151,7 @@ public:
 
 protected:
 
-    void callNextStep() { //override;
+    void callStep() { //override;
         if (m_obj != NULL && m_sequenceStepMethod != NULL) {
             (m_obj->*m_sequenceStepMethod)(*this, m_sequenceStep);
         }
