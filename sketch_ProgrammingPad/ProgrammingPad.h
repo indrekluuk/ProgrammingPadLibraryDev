@@ -31,7 +31,7 @@ public:
             uint8_t p6,
             uint16_t r2
     ) :
-            m_nodeReader(r2)
+            m_nodeReader(p1, p2, p3, p4, p5, p6, r2)
     {
     }
 

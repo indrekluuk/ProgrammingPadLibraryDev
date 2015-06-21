@@ -24,7 +24,15 @@ private:
     uint16_t m_r2;
 
 public:
-    HardwareNodeReader(uint16_t r2);
+    HardwareNodeReader(
+            uint8_t p1,
+            uint8_t p2,
+            uint8_t p3,
+            uint8_t p4,
+            uint8_t p5,
+            uint8_t p6,
+            uint16_t r2
+    );
 
     uint16_t getNodeR1(uint8_t nodeId);
 

@@ -12,11 +12,14 @@ class CommandCallSub : public Command {
 
 private:
 
-    ProgramSub & m_programSub;
+    ProgramSub * m_programSub;
 
 public:
 
+    CommandCallSub();
     CommandCallSub(ProgramSub & sub);
+
+    void init(ProgramSub & sub);
 
     void execute(Callback &done);
 };

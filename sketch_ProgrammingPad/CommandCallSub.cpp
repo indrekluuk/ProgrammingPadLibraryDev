@@ -4,12 +4,25 @@
 
 #include "CommandCallSub.h"
 
-CommandCallSub::CommandCallSub(ProgramSub &sub) :
-        m_programSub(sub)
+CommandCallSub::CommandCallSub() :
+        m_programSub(nullptr)
 {
+}
 
+CommandCallSub::CommandCallSub(ProgramSub &sub) :
+        m_programSub(&sub)
+{
 }
 
 void CommandCallSub::execute(Callback &done) {
-    m_programSub.start(&done);
+    if (m_programSub != nullptr) {
+        m_programSub->start(&done);
+    } else {
+        done.call();
+    }
+}
+
+
+void CommandCallSub::init(ProgramSub & sub) {
+    m_programSub = &sub;
 }

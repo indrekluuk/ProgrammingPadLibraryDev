@@ -4,7 +4,15 @@
 
 #include "NodeReader.h"
 
-HardwareNodeReader::HardwareNodeReader(uint16_t r2) :
+HardwareNodeReader::HardwareNodeReader(
+        uint8_t p1,
+        uint8_t p2,
+        uint8_t p3,
+        uint8_t p4,
+        uint8_t p5,
+        uint8_t p6,
+        uint16_t r2
+) :
         m_r2(r2)
 {
 
