@@ -3,13 +3,9 @@
 //
 
 #include "gtest/gtest.h"
-#include "Arduino.h"
 #include "Scheduler.h"
 #include "ProgramSub.h"
-#include "mock/MockNodeReader.h"
 #include "mock/MockCommandCountExecutions.h"
-#include "CommandCallSub.h"
-#include "CommandDelay.h"
 
 
 
@@ -65,7 +61,12 @@ TEST_F(NodeExecuterTest, testFindClosest) {
 
 
 
-
+TEST_F(NodeExecuterTest, testFindCloseToZero) {
+    CommandDoNothing & doNothing = m_nodeExecuter.getCommandDoNothing();
+    ASSERT_EQ(&doNothing, &m_nodeExecuter.getCommand(0));
+    ASSERT_EQ(&doNothing, &m_nodeExecuter.getCommand(500 - 10));
+    ASSERT_EQ(&m_commandCountExecutions1, &m_nodeExecuter.getCommand(500 + 10));
+};
 
 
 

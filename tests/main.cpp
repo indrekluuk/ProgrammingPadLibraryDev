@@ -33,7 +33,7 @@
 
 int main(int argc, char **argv) {
 
-    //::testing::GTEST_FLAG(filter) = "SubExecutionTest.testExecuteSub";
+    //::testing::GTEST_FLAG(filter) = "NodeExecuterTest.testFindCloseToZero";
 
     testing::InitGoogleTest(&argc, argv);
     int result = RUN_ALL_TESTS();

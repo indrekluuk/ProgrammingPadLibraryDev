@@ -9,3 +9,6 @@ void NodeExecuter::execute(uint16_t nodeR1, Callback & done) {
     getCommand(nodeR1).execute(done);
 }
 
+CommandDoNothing & NodeExecuter::getCommandDoNothing() {
+    return m_commandDoNothing;
+}
