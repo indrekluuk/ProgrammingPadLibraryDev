@@ -5,14 +5,18 @@
 #ifndef PROGRAMMINGPADLIBRARYDEV_COMMAND_H
 #define PROGRAMMINGPADLIBRARYDEV_COMMAND_H
 
-#include "Callback.h"
+#include "Scheduler.h"
 
 
 class Command {
 
+protected:
+
+    static Scheduler s_commandScheduler;
+
 public:
     virtual void execute(Callback & done) = 0;
-
+    static void stop();
 };
 
 

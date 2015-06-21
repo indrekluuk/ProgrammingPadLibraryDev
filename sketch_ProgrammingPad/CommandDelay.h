@@ -10,6 +10,8 @@
 
 class CommandDelay : public Command {
 
+private:
+    uint32_t m_time_ms;
 
 public:
     CommandDelay(uint32_t time_ms);

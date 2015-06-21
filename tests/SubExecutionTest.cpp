@@ -139,7 +139,7 @@ TEST_F(SubExecutionTest, testWaitCommand) {
     m_nodeReader.setNode(2, CMD_DELAY_15000_R1);
     m_nodeReader.setNode(3, CMD_EXEC_CNT_1_R1);
 
-    m_main.init(0, 2, m_nodeReader, m_nodeExecuter);
+    m_main.init(0, 4, m_nodeReader, m_nodeExecuter);
     m_main.start(nullptr);
 
     ASSERT_EQ(0, m_commandCountExecutions1.getExecutinoCount());
