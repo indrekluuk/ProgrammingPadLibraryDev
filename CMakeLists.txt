@@ -44,5 +44,7 @@ add_executable(ProgrammingPadLibraryDev
         sketch_ProgrammingPad/CommandDoNothing.cpp
         sketch_ProgrammingPad/CommandDoNothing.h
         sketch_ProgrammingPad/CommandCallSub.cpp
-        sketch_ProgrammingPad/CommandCallSub.h)
+        sketch_ProgrammingPad/CommandCallSub.h
+        sketch_ProgrammingPad/CommandDelay.cpp
+        sketch_ProgrammingPad/CommandDelay.h)
 
