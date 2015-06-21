@@ -30,7 +30,9 @@ public:
             uint8_t p5,
             uint8_t p6,
             uint16_t r2
-    ) {
+    ) :
+            m_nodeReader(r2)
+    {
     }
 
 

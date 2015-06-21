@@ -19,11 +19,14 @@ public:
 
 class HardwareNodeReader : public NodeReader {
 
+private:
+
+    uint16_t m_r2;
 
 public:
-    uint16_t getNodeR1(uint8_t nodeId) {
-        return 0; //todo
-    }
+    HardwareNodeReader(uint16_t r2);
+
+    uint16_t getNodeR1(uint8_t nodeId);
 
 };
 
