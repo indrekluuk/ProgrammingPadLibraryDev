@@ -17,7 +17,7 @@ class NodeExecuter {
 
 public:
 
-    void execute(uint8_t nodeR1, Callback & done);
+    void execute(uint16_t nodeR1, Callback & done);
 
 public:
     virtual Command & getCommand(uint16_t r1) = 0;

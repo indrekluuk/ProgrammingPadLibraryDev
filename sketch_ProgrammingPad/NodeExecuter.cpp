@@ -5,7 +5,7 @@
 #include "NodeExecuter.h"
 
 
-void NodeExecuter::execute(uint8_t nodeR1, Callback & done) {
+void NodeExecuter::execute(uint16_t nodeR1, Callback & done) {
     getCommand(nodeR1).execute(done);
 }
 

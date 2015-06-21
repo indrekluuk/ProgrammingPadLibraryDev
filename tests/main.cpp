@@ -32,6 +32,9 @@
 
 
 int main(int argc, char **argv) {
+
+    // ::testing::GTEST_FLAG(filter) = "*SubExecutionTest.testExecuteSubs*";
+
     testing::InitGoogleTest(&argc, argv);
     int result = RUN_ALL_TESTS();
     /*

@@ -8,10 +8,16 @@
 #include "ProgramSub.h"
 #include "mock/MockNodeReader.h"
 #include "mock/MockCommandCountExecutions.h"
+#include "CommandCallSub.h"
 
 
 
-static uint16_t CMD_EXEC_CNT_R1 = 1000;
+static uint16_t CMD_EXEC_CNT_1_R1 = 1000;
+static uint16_t CMD_EXEC_CNT_2_R1 = 1100;
+static uint16_t CMD_EXEC_CNT_3_R1 = 1200;
+static uint16_t CMD_CALL_SUB_1_R1 = 2000;
+static uint16_t CMD_CALL_SUB_2_R1 = 2100;
+#define COMMAND_COUNT 5
 
 
 class SubExecutionTest : public ::testing::Test {
@@ -21,13 +27,28 @@ private:
 protected:
 
     MockNodeReader m_nodeReader;
-    NodeExecuterConfiguration<1> m_nodeExecuter;
+    NodeExecuterConfiguration<COMMAND_COUNT> m_nodeExecuter;
 
-    MockCommandCountExecutions m_commandCountExecutions;
+    ProgramSub m_main;
+    ProgramSub m_sub1;
+    ProgramSub m_sub2;
 
-    SubExecutionTest()
+    MockCommandCountExecutions m_commandCountExecutions1;
+    MockCommandCountExecutions m_commandCountExecutions2;
+    MockCommandCountExecutions m_commandCountExecutions3;
+    CommandCallSub m_commandCallSub1;
+    CommandCallSub m_commandCallSub2;
+
+
+    SubExecutionTest() :
+            m_commandCallSub1(m_sub1),
+            m_commandCallSub2(m_sub2)
     {
-        m_nodeExecuter.initCommand(0, CMD_EXEC_CNT_R1, m_commandCountExecutions);
+        m_nodeExecuter.initCommand(0, CMD_EXEC_CNT_1_R1, m_commandCountExecutions1);
+        m_nodeExecuter.initCommand(1, CMD_EXEC_CNT_2_R1, m_commandCountExecutions2);
+        m_nodeExecuter.initCommand(2, CMD_EXEC_CNT_3_R1, m_commandCountExecutions3);
+        m_nodeExecuter.initCommand(3, CMD_CALL_SUB_1_R1, m_commandCallSub1);
+        m_nodeExecuter.initCommand(4, COMMAND_COUNT, m_commandCallSub2);
     }
 
     virtual void SetUp() {
@@ -48,14 +69,37 @@ protected:
 
 
 TEST_F(SubExecutionTest, testExecuteSubNodes) {
-    m_nodeReader.setNode(0, CMD_EXEC_CNT_R1);
-    m_nodeReader.setNode(2, CMD_EXEC_CNT_R1);
+    m_nodeReader.setNode(0, CMD_EXEC_CNT_1_R1);
+    m_nodeReader.setNode(2, CMD_EXEC_CNT_1_R1);
 
-    ProgramSub sub;
-    sub.init(0, 3, m_nodeReader, m_nodeExecuter);
-    sub.start(nullptr);
+    m_main.init(0, 3, m_nodeReader, m_nodeExecuter);
+    m_main.start(nullptr);
 
-    ASSERT_EQ(2, m_commandCountExecutions.getExecutinoCount());
+    ASSERT_EQ(2, m_commandCountExecutions1.getExecutinoCount());
 };
 
+
+
+TEST_F(SubExecutionTest, testExecuteSubs) {
+    m_nodeReader.setNode(0, CMD_EXEC_CNT_1_R1); // 1: cnt_1 = 1
+    m_nodeReader.setNode(1, CMD_EXEC_CNT_1_R1); // 2: cnt_1 = 2
+    m_nodeReader.setNode(2, CMD_CALL_SUB_2_R1); // 3: call sub 2
+    m_nodeReader.setNode(3, CMD_EXEC_CNT_1_R1); // 8: cnt_1 = 3
+
+    m_nodeReader.setNode(10, CMD_EXEC_CNT_2_R1); // 7: cnt_2 = 1
+
+    m_nodeReader.setNode(20, CMD_EXEC_CNT_3_R1); // 4: cnt_3 = 1
+    m_nodeReader.setNode(21, CMD_EXEC_CNT_3_R1); // 5: cnt_3 = 1
+    m_nodeReader.setNode(22, CMD_CALL_SUB_1_R1); // 6: call sub 1
+
+
+    m_main.init(0, 4, m_nodeReader, m_nodeExecuter);
+    m_sub1.init(10, 1, m_nodeReader, m_nodeExecuter);
+    m_sub2.init(20, 3, m_nodeReader, m_nodeExecuter);
+    m_main.start(nullptr);
+
+    ASSERT_EQ(3, m_commandCountExecutions1.getExecutinoCount());
+    ASSERT_EQ(1, m_commandCountExecutions2.getExecutinoCount());
+    ASSERT_EQ(2, m_commandCountExecutions3.getExecutinoCount());
+};
 

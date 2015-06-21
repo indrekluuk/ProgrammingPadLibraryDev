@@ -21,12 +21,11 @@ public:
     }
 
     uint16_t getNodeR1(uint8_t nodeId) {
-        if (idR1Map.count(nodeId) > 0) {
-            return idR1Map[nodeId];
-        } else {
-            return 0;
-        }
+        uint16_t r1 = idR1Map.count(nodeId) > 0 ?
+                      idR1Map[nodeId] :
+                      (uint16_t)0;
 
+        return r1;
     }
 
 

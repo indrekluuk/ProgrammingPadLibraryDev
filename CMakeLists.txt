@@ -22,6 +22,7 @@ set(TEST_SOURCE_FILES
         tests/main.cpp
         tests/Arduino.cpp
         tests/mock/MockNodeReader.h
+        tests/mock/MockCommandCountExecutions.h
         tests/SubExecutionTest.cpp
 )
 
@@ -39,5 +40,9 @@ add_executable(ProgrammingPadLibraryDev
         sketch_ProgrammingPad/NodeReader.cpp
         sketch_ProgrammingPad/NodeReader.h
         sketch_ProgrammingPad/NodeExecuter.cpp
-        sketch_ProgrammingPad/NodeExecuter.h sketch_ProgrammingPad/CommandDoNothing.cpp sketch_ProgrammingPad/CommandDoNothing.h tests/mock/MockCommandCountExecutions.h)
+        sketch_ProgrammingPad/NodeExecuter.h
+        sketch_ProgrammingPad/CommandDoNothing.cpp
+        sketch_ProgrammingPad/CommandDoNothing.h
+        sketch_ProgrammingPad/CommandCallSub.cpp
+        sketch_ProgrammingPad/CommandCallSub.h)
 
