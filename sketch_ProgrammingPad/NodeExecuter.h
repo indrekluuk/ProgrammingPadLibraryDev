@@ -54,6 +54,17 @@ public:
     }
 
     Command & getCommand(uint16_t r1) {
+        if (r1 == 0) {
+            return m_commandDoNothing;
+        } else {
+            return findClosest(r1);
+        }
+    }
+
+
+private:
+
+    Command & findClosest(uint16_t r1) {
         uint8_t commandIndex = commandCount;
         int32_t minDifference = 100000;
 
@@ -69,9 +80,6 @@ public:
 
         return commandIndex < commandCount ? *m_commands[commandIndex] : m_commandDoNothing;
     }
-
-
-private:
 
     bool isCommandInitialized(uint8_t index) {
         return m_commandR1[index] > 0;

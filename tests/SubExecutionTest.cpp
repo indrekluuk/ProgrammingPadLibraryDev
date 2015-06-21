@@ -49,15 +49,13 @@ protected:
 
 TEST_F(SubExecutionTest, testExecuteSubNodes) {
     m_nodeReader.setNode(0, CMD_EXEC_CNT_R1);
-    m_nodeReader.setNode(1, CMD_EXEC_CNT_R1);
     m_nodeReader.setNode(2, CMD_EXEC_CNT_R1);
 
     ProgramSub sub;
     sub.init(0, 3, m_nodeReader, m_nodeExecuter);
     sub.start(nullptr);
 
-    ASSERT_EQ(3, m_commandCountExecutions.getExecutinoCount());
-
+    ASSERT_EQ(2, m_commandCountExecutions.getExecutinoCount());
 };
 
 
