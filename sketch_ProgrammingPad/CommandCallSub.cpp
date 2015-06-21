@@ -11,5 +11,5 @@ CommandCallSub::CommandCallSub(ProgramSub &sub) :
 }
 
 void CommandCallSub::execute(Callback &done) {
-    done.call();
+    m_programSub.start(&done);
 }
